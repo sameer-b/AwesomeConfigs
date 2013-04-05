@@ -18,8 +18,8 @@ The config uses the following startup packages:
 6)batti -> battery applet
 if you do not have these installed, either install them or comment them out, from the end of rc.lua
 
-Please set the correct location for theme.lua and all the images.
-The images are included in the icons folder but you will have to manually set the path for the icons.
-The sound,wifi,battery applets are NOT lua applets. I use simple gtk applets from AUR.
- 
+>Please set the correct location for theme.lua and all the images.
+>The images are included in the icons folder but you will have to manually set the path for the icons.
+>The sound,wifi,battery applets are NOT lua applets. I use simple gtk applets from AUR.
+>install the pacmanUpdates script in your $PATH
 NOTE: the fonts will be really large. Please scale them down from rc.lua and theme.lua. Since newrez scales up my screen, i use rather large fonts. :)

@@ -125,7 +125,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 --net widget starts
 netwidget = wibox.widget.textbox()
- vicious.register(netwidget, vicious.widgets.net, '<span color="#CC9393"><b> Down:${wlp9s0 down_kb} kb/s</b></span> <span color="#7F9F7F"><b>Up:${wlp9s0 up_kb} kb/s</b></span>', 3)
+ vicious.register(netwidget, vicious.widgets.net, '<span color="#CC9393"><b> ↓:${wlp9s0 down_kb} kb/s</b></span> <span color="#7F9F7F"><b>↑:${wlp9s0 up_kb} kb/s</b></span>', 3)
 --net widget ends
 
 --uname widgetstart
@@ -485,7 +485,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 
 awful.util.spawn_with_shell("newrez 1440x810")
-awful.util.spawn_with_shell("run_once synapse -s")
+awful.util.spawn_with_shell("run_once synapse")
 awful.util.spawn_with_shell("sudo preload")
 awful.util.spawn_with_shell("run_once nm-applet")
 awful.util.spawn_with_shell("run_once batti")

@@ -1,6 +1,8 @@
 AwesomeConfigs
 ==============
 
+https://github.com/sameer-b/AwesomeConfigs/blob/master/awesomeWM.jpg?raw=true
+
 here are my aweomeWM configs.
 a)rc.lua
 b)theme.lua

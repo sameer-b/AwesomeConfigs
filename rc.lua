@@ -138,9 +138,16 @@ uname:set_text(" ".. showName)
 
 --updateWidgetStart
 showUpdates=wibox.widget.textbox()
-updates=awful.util.pread("pacmanUpdates")
 showUpdates:set_font("Sans bold")
-showUpdates:set_markup(" :"..updates)
+--
+
+
+--setting a timer for updating counter, function to update the pacman counter
+pacmanUpdateTimer = timer ({timeout=30})
+pacmanUpdateTimer:connect_signal("timeout",function()
+updates=awful.util.pread("pacmanUpdates")
+showUpdates:set_markup(" :"..updates)  end)
+pacmanUpdateTimer:start()
 
 --widgetIconstart
 pacmanIcon=wibox.widget.imagebox()

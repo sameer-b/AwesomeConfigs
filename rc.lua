@@ -47,7 +47,8 @@ beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 terminal = "gnome-terminal"
 editor = "gedit"
 editor_cmd = terminal .. " -x " .. editor
-browser="chromium"
+browser="google-chrome"
+fileManager="thunar"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -85,7 +86,7 @@ end
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {
-names = {"Junk ","Web ","TVee ","Code"},
+names = {"Junk ","Web ","TVee ", "Code"},
 layout = { layouts[1], layouts[1], layouts[1], layouts[1]   }
 }
 for s=1,screen.count() do
@@ -108,9 +109,10 @@ myawesomemenu = {
    { "quit", awesome.quit }
 }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal } ,
-                                    { "Chrome" , browser }
+mymainmenu = awful.menu({ items = { { "Awesome", myawesomemenu, beautiful.awesome_icon },
+                                    { "Terminal", terminal } ,
+                                    { "Chrome" , browser } ,
+{ "Files" , fileManager}
                                   }
                         })
 
@@ -125,37 +127,24 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 --net widget starts
 netwidget = wibox.widget.textbox()
- vicious.register(netwidget, vicious.widgets.net, '<span color="#CC9393"><b> ↓:${wlp9s0 down_kb} kb/s</b></span> <span color="#7F9F7F"><b>↑:${wlp9s0 up_kb} kb/s</b></span>', 3)
+ vicious.register(netwidget, vicious.widgets.net, '<span color="#CC9393"><b> ↓:${wlan0 down_kb} kb/s</b></span> <span color="#7F9F7F"><b>↑:${wlan0 up_kb} kb/s  </b></span>', 3)
 --net widget ends
 
---uname widgetstart
-uname=wibox.widget.textbox()
-showName=awful.util.pread("uname -r")
-uname:set_font("Sans bold")
-uname:set_text(" ".. showName)
---uname widgetend
+--upTimeWidgetStart
+uptime=wibox.widget.textbox()
+uptime:set_font("sans bold 11")
+uptimeRefresh=timer({timeout=600})
+uptimeRefresh:start()
+uptimeRefresh:connect_signal("timeout",
+function()
+currentUptime=awful.util.pread("showUptime")
+uptime:set_markup('<span color="blue"> <b>Uptime:</b> </span> '..currentUptime ) 
+end
+) 
+
+--upTimeWidgetEnd
 
 
---updateWidgetStart
-showUpdates=wibox.widget.textbox()
-showUpdates:set_font("Sans bold")
---
-
-
---setting a timer for updating counter, function to update the pacman counter
-pacmanUpdateTimer = timer ({timeout=30})
-pacmanUpdateTimer:connect_signal("timeout",function()
-updates=awful.util.pread("pacmanUpdates")
-showUpdates:set_markup(" :"..updates)  end)
-pacmanUpdateTimer:start()
-
---widgetIconstart
-pacmanIcon=wibox.widget.imagebox()
-pacmanIcon:set_image("/home/sam/Pictures/pacman.png")
-pacmanIcon:set_resize(allowed)
---widgetIconends
-
---updateWidgetEnd
 
 -- Create a textclock widget
 
@@ -228,7 +217,7 @@ for s = 1, screen.count() do
     mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
     -- Create the wibox
-    mywibox[s] = awful.wibox({ position = "top", screen = s })
+    mywibox[s] = awful.wibox({ position = "top", screen = s,height="28" })
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
@@ -242,9 +231,8 @@ right_layout:add(netwidget)
     if s == 1 then right_layout:add(wibox.widget.systray()) end
 
 right_layout:add(mytextclock)
-right_layout:add(uname)
-right_layout:add(pacmanIcon)
-right_layout:add(showUpdates)
+right_layout:add(uptime)
+
 right_layout:add(mylayoutbox[s])
 
     -- Now bring it all together (with the tasklist in the middle)
@@ -497,4 +485,5 @@ awful.util.spawn_with_shell("sudo preload")
 awful.util.spawn_with_shell("run_once nm-applet")
 awful.util.spawn_with_shell("run_once batti")
 awful.util.spawn_with_shell("run_once volumeicon")
+awful.util.spawn_with_shell("run_once gnome-settings-daemon")
 

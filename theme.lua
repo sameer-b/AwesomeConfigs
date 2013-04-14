@@ -4,9 +4,10 @@
 
 theme = {}
 
-theme.font = "Sans  bold 11"
+theme.font          = "sans bold 9"
+
 theme.bg_normal     = "#000000"
-theme.bg_focus      = "#111222" --7488FA
+theme.bg_focus      = "#111222"
 theme.bg_urgent     = "#ff0000"
 theme.bg_minimize   = "#444444"
 theme.bg_systray    = theme.bg_normal
@@ -40,7 +41,7 @@ theme.border_marked = "#91231c"
 -- menu_[border_color|border_width]
 theme.menu_submenu_icon = "/usr/share/awesome/themes/default/submenu.png"
 theme.menu_height = 30
-theme.menu_width  = 150
+theme.menu_width  = 180
 
 -- You can add as many variables as
 -- you wish and access them by using
@@ -91,7 +92,7 @@ theme.awesome_icon = "/usr/share/awesome/icons/awesome16.png"
 
 -- Define the icon theme for application icons. If not set then the icons 
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
-theme.icon_theme ="Faenza-Cupertino-Dark"
+theme.icon_theme ="Faenza"
 
 return theme
----vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
+-- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
